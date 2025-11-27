@@ -2,6 +2,7 @@ import CabeceraCV from "./components/CabeceraCV.jsx";
 import Perfil from "./components/Perfil.jsx";
 import Educacion from "./components/Educacion.jsx";
 import Experiencia from "./components/Experiencia.jsx";
+import StackTecnologias from "./components/StackTecnologias.jsx";
 
 function App() {
   return (
@@ -10,11 +11,30 @@ function App() {
       <Perfil />
       <Educacion />
       <Experiencia />
+      <StackTecnologias />
     </div>
   );
 }
 
 export default App;
+
+// import CabeceraCV from "./components/CabeceraCV.jsx";
+// import Perfil from "./components/Perfil.jsx";
+// import Educacion from "./components/Educacion.jsx";
+// import Experiencia from "./components/Experiencia.jsx";
+
+// function App() {
+//   return (
+//     <div>
+//       <CabeceraCV />
+//       <Perfil />
+//       <Educacion />
+//       <Experiencia />
+//     </div>
+//   );
+// }
+
+// export default App;
 // function App() {
 //   return (
 //     <>
@@ -60,5 +80,3 @@ export default App;
 // }
 
 // export default App
-
-
