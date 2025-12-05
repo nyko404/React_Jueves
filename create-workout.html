@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Workout | FitTracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles/_reset.css">
+    <link rel="stylesheet" href="styles/_variables.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    
+    <style>
+        /* Estilos específicos para la vista Create Workout */
+
+        .create-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .create-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .create-header p {
+            color: var(--color-text-secondary);
+        }
+
+        /* Contenedor del formulario principal */
+        .form-container {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-light);
+            padding: var(--spacing-xl);
+        }
+
+        /* Estructura de filas del formulario (GRID de 2 columnas) */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* --- Sección de Ejercicios --- */
+
+        .exercises-section {
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Tarjeta de Ejercicio */
+        .exercise-card {
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background-color: var(--color-background);
+        }
+
+        .exercise-header {
+            margin-bottom: var(--spacing-md);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        /* Campos de sets (FLEXBOX para alinear inputs pequeños) */
+        .set-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .set-group label {
+            width: 50px; /* Ancho fijo para 'Set 1:' */
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .set-input-container {
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+
+        .set-input-container input {
+            width: 70px; /* Ancho fijo para reps/weight */
+            text-align: center;
+            font-size: 0.9rem;
+            padding: 8px;
+        }
+
+        .set-input-container span {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Footer del formulario (Acciones) */
+        .form-footer {
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--spacing-md);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .set-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+            .set-input-container {
+                flex-wrap: wrap;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-dumbbell logo-icon"></i>
+            <span>FitTracker</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li class="active"><a href="workouts.html">Workouts</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile">
+            <i class="fa-regular fa-bell" style="color: var(--color-text-secondary);"></i>
+            <div class="user-avatar">JD</div>
+        </div>
+    </header>
+
+    <main class="main-content app-container">
+        <header class="create-header">
+            <div>
+                <h1>Create New Workout</h1>
+                <p>Design your custom workout plan</p>
+            </div>
+            <a href="workouts.html" class="btn btn-secondary">
+                ← Back to Workouts
+            </a>
+        </header>
+
+        <form class="form-container" action="#" method="post">
+            <section>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="workout-name">Workout Name</label>
+                        <input type="text" id="workout-name" class="input-field" placeholder="e.g., Upper Body Strength" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="workout-type">Workout Type</label>
+                        <select id="workout-type" class="input-field">
+                            <option value="">Select type</option>
+                            <option value="strength">Strength</option>
+                            <option value="cardio">Cardio</option>
+                            <option value="hiit">HIIT</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: var(--spacing-lg);">
+                    <label for="description">Description (Optional)</label>
+                    <textarea id="description" class="input-field" rows="3" placeholder="Brief description of your workout..."></textarea>
+                </div>
+            </section>
+            
+            <section class="exercises-section">
+                <header class="section-header">
+                    <h2>Exercises</h2>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa-solid fa-plus icon"></i> Add Exercise
+                    </button>
+                </header>
+
+                <article class="exercise-card">
+                    <header class="exercise-header">Exercise 1</header>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ex1-name">Exercise Name</label>
+                            <input type="text" id="ex1-name" class="input-field" placeholder="e.g., Bench Press">
+                        </div>
+                        <div class="form-group">
+                            <label for="ex1-muscle">Muscle Group</label>
+                            <select id="ex1-muscle" class="input-field">
+                                <option value="">Select muscle group</option>
+                                <option value="chest">Chest</option>
+                                <option value="back">Back</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sets</label>
+                        <div style="margin-bottom: var(--spacing-sm); display: flex; justify-content: flex-end;">
+                             <button type="button" class="btn btn-primary" style="padding: 8px 15px; font-size: 0.875rem;">
+                                <i class="fa-solid fa-plus icon"></i> Add Set
+                            </button>
+                        </div>
+                       
+                        <div class="set-group">
+                            <label>Set 1:</label>
+                            <div class="set-input-container">
+                                <input type="number" value="10" min="1"><span>reps</span>
+                            </div>
+                            <div class="set-input-container">
+                                <input type="number" value="60" min="1"><span>weight</span>
+                            </div>
+                            <div class="set-input-container">
+                                <span>kg</span>
+                            </div>
+                        </div>
+
+                        </div>
+
+                    <div class="form-group" style="margin-top: var(--spacing-lg);">
+                        <label for="ex1-rest">Rest Time (seconds)</label>
+                        <input type="number" id="ex1-rest" class="input-field" value="60" min="0" style="width: 150px;">
+                    </div>
+                </article>
+
+                </section>
+
+            <footer class="form-footer">
+                <button type="button" class="btn btn-secondary">Save as Draft</button>
+                <button type="submit" class="btn btn-primary">Create Workout</button>
+            </footer>
+        </form>
+    </main>
+</body>
+</html>

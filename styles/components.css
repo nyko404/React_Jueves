@@ -1,0 +1,67 @@
+/* Estilos para Componentes Reutilizables (Botones, Tarjetas, Formularios) */
+
+/* --- Botones --- */
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s, opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-light);
+}
+
+.btn-secondary {
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-border);
+}
+
+/* --- Tarjetas (Cards) --- */
+
+.card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-light);
+    padding: var(--spacing-lg);
+}
+
+/* --- Formularios (Inputs y Selects) --- */
+
+.input-field {
+    width: 100%;
+    padding: 10px var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.input-field:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+/* Utilidad para simular íconos */
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    /* Usaremos texto o SVG simples para simular los íconos de FontAwesome/Lucide */
+}

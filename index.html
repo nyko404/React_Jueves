@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | FitTracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles/_reset.css">
+    <link rel="stylesheet" href="styles/_variables.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    
+    <style>
+        /* Estilos específicos para la vista del Dashboard */
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        /* Contenedor principal de secciones inferiores */
+        .dashboard-sections {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Actividad y Próximos Entrenamientos */
+            gap: var(--spacing-xl);
+        }
+        
+        /* Ajuste para la tarjeta 'Create Workout' */
+        .card-create-workout {
+            grid-column: span 2; /* Ocupa dos columnas */
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-create-workout h3 {
+            color: var(--color-white);
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .card-create-workout p {
+            opacity: 0.9;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .card-create-workout .btn-outline {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        
+        .card-stat {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: var(--spacing-sm);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        /* Lista de actividad y entrenamientos */
+        .activity-item, .upcoming-item {
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-item:last-child, .upcoming-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-info h4 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .activity-info p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .card-create-workout {
+                grid-column: span 1; 
+            }
+            .dashboard-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-create-workout {
+                grid-column: span 1; 
+            }
+            .header {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            .main-nav {
+                width: 100%;
+            }
+            .main-nav ul {
+                justify-content: space-around;
+                gap: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-dumbbell logo-icon"></i>
+            <span>FitTracker</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li class="active"><a href="index.html">Dashboard</a></li>
+                <li><a href="workouts.html">Workouts</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile">
+            <i class="fa-regular fa-bell" style="color: var(--color-text-secondary);"></i>
+            <div class="user-avatar">JD</div>
+        </div>
+    </header>
+
+    <main class="main-content app-container">
+        <section class="welcome-header" style="margin-bottom: var(--spacing-xl);">
+            <h1 style="font-size: 2rem; font-weight: 700;">Welcome back, John!</h1>
+            <p style="color: var(--color-text-secondary);">Track your fitness journey and stay motivated</p>
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="card card-stat">
+                <div class="stat-header">
+                    <i class="fa-solid fa-bolt stat-icon icon-blue"></i>
+                    <span class="stat-label">Total Workouts</span>
+                </div>
+                <div class="stat-number">47</div>
+            </article>
+
+            <article class="card card-stat">
+                <div class="stat-header">
+                    <i class="fa-regular fa-calendar-days stat-icon icon-green"></i>
+                    <span class="stat-label">This Week</span>
+                </div>
+                <div class="stat-number">3</div>
+            </article>
+
+            <article class="card card-stat">
+                <div class="stat-header">
+                    <i class="fa-solid fa-trophy stat-icon icon-yellow"></i>
+                    <span class="stat-label">Personal Records</span>
+                </div>
+                <div class="stat-number">12</div>
+            </article>
+
+            <article class="card card-stat">
+                <div class="stat-header">
+                    <i class="fa-solid fa-fire stat-icon icon-red"></i>
+                    <span class="stat-label">Current Streak</span>
+                </div>
+                <div class="stat-number">7 days</div>
+            </article>
+
+            <article class="card card-create-workout">
+                <header>
+                    <i class="fa-solid fa-circle-plus icon" style="font-size: 1.5rem; margin-bottom: var(--spacing-md);"></i>
+                    <h3>Create Workout</h3>
+                    <p>Design your next training session</p>
+                </header>
+                <a href="create-workout.html" class="btn btn-outline">
+                    Get Started <i class="fa-solid fa-arrow-right icon"></i>
+                </a>
+            </article>
+
+            <article class="card card-stat">
+                <header class="stat-header">
+                    <i class="fa-solid fa-list-check stat-icon icon-text-dark"></i>
+                    <span class="stat-label">My Workouts</span>
+                </header>
+                <p style="color: var(--color-text-secondary);">Manage your workout plans</p>
+                <a href="workouts.html" style="font-size: 0.875rem; font-weight: 600;">View All →</a>
+            </article>
+
+            <article class="card card-stat">
+                <header class="stat-header">
+                    <i class="fa-regular fa-calendar-check stat-icon icon-text-dark"></i>
+                    <span class="stat-label">Schedule</span>
+                </header>
+                <p style="color: var(--color-text-secondary);">Plan your upcoming sessions</p>
+                <a href="schedule.html" class="btn btn-primary" style="font-size: 0.875rem;">
+                    Schedule Now <i class="fa-solid fa-arrow-right icon"></i>
+                </a>
+            </article>
+        </section>
+
+        <section class="dashboard-sections">
+            <section>
+                <h2 style="font-size: 1.5rem; margin-bottom: var(--spacing-md);">Recent Activity</h2>
+                <div class="card">
+                    <article class="activity-item">
+                        <div class="activity-info">
+                            <h4 style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                <i class="fa-solid fa-circle-check icon-green"></i> Completed Full Body Workout
+                            </h4>
+                            <p>2 hours ago</p>
+                        </div>
+                    </article>
+                    
+                    <article class="activity-item">
+                        <div class="activity-info">
+                            <h4 style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                <i class="fa-solid fa-circle-plus icon-blue"></i> Created Leg Day Routine
+                            </h4>
+                            <p>Yesterday</p>
+                        </div>
+                    </article>
+                    
+                    <article class="activity-item">
+                        <div class="activity-info">
+                            <h4 style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                <i class="fa-solid fa-trophy icon-yellow"></i> New PR: Bench Press 85kg
+                            </h4>
+                            <p>3 days ago</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section>
+                <h2 style="font-size: 1.5rem; margin-bottom: var(--spacing-md);">Upcoming Workouts</h2>
+                <div class="card">
+                    <article class="upcoming-item">
+                        <div>
+                            <h4>Upper Body Strength</h4>
+                            <p>Today, 6:00 PM</p>
+                        </div>
+                        <span class="btn-secondary" style="font-size: 0.75rem; padding: 4px 8px;">Today</span>
+                    </article>
+                    
+                    <article class="upcoming-item">
+                        <div>
+                            <h4>Cardio Session</h4>
+                            <p>Tomorrow, 7:00 AM</p>
+                        </div>
+                        <span class="btn-secondary" style="font-size: 0.75rem; padding: 4px 8px;">Tomorrow</span>
+                    </article>
+                    
+                    <article class="upcoming-item">
+                        <div>
+                            <h4>Leg Day</h4>
+                            <p>Friday, 5:30 PM</p>
+                        </div>
+                        <span class="btn-secondary" style="font-size: 0.75rem; padding: 4px 8px;">Friday</span>
+                    </article>
+                    
+                    <a href="schedule.html" style="margin-top: var(--spacing-md); display: inline-block;">View full schedule →</a>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    </body>
+</html>

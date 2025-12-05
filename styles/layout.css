@@ -1,0 +1,92 @@
+/* Estilos para el Layout General (Header y Main Container) */
+
+.app-container {
+    max-width: 1280px; /* Ancho máximo común para dashboards */
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg); /* Espacio lateral en pantallas grandes */
+}
+
+/* --- Header (Barra de Navegación Superior) --- */
+
+.header {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    color: var(--color-primary);
+    margin-right: var(--spacing-sm);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: var(--spacing-xl);
+}
+
+.main-nav a {
+    color: var(--color-text-secondary);
+    padding: var(--spacing-sm) 0;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover {
+    color: var(--color-primary);
+}
+
+.main-nav .active a {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.main-nav .active a::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-sm);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+/* --- Main Content Area --- */
+
+.main-content {
+    padding: var(--spacing-xl) 0;
+}

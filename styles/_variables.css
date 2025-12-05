@@ -1,0 +1,36 @@
+/* Variables CSS Globales */
+
+:root {
+    /* Colores */
+    --color-primary: #007BFF;           /* Azul principal para CTA y enlaces */
+    --color-primary-light: #4F93E9;     /* Para gradientes o estados hover */
+    --color-background: #F9FAFB;        /* Fondo general de la aplicación */
+    --color-white: #FFFFFF;             /* Fondos de tarjetas y principales */
+    --color-border: #E5E7EB;            /* Bordes ligeros */
+    
+    /* Colores de Texto */
+    --color-text-dark: #1F2937;         /* Texto principal (headings) */
+    --color-text-secondary: #6B7280;    /* Texto secundario (descripciones) */
+    
+    /* Tipografía */
+    --font-family: 'Inter', system-ui, sans-serif;
+    --font-size-base: 16px;
+    
+    /* Espaciado */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Otros */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Colores de íconos/gráficas del dashboard */
+.icon-blue { color: #3B82F6; }
+.icon-green { color: #10B981; }
+.icon-yellow { color: #F59E0B; }
+.icon-red { color: #EF4444; }

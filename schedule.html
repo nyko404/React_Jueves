@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Schedule | FitTracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles/_reset.css">
+    <link rel="stylesheet" href="styles/_variables.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    
+    <style>
+        /* Estilos específicos para la vista Schedule */
+        
+        .schedule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .schedule-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .schedule-header p {
+            color: var(--color-text-secondary);
+        }
+
+        /* --- Calendario --- */
+        .calendar-container {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-light);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .calendar-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .view-toggles {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .toggle-btn {
+            background-color: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 8px 15px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .toggle-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        .month-selector {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .month-selector button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            padding: 5px;
+        }
+        
+        /* Estructura de la cuadrícula del calendario (CSS GRID) */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+        }
+
+        .day-header {
+            text-align: center;
+            padding: var(--spacing-md) 0;
+            font-weight: 600;
+            background-color: var(--color-background);
+            font-size: 0.875rem;
+        }
+
+        .day-cell {
+            background-color: var(--color-white);
+            min-height: 100px;
+            padding: var(--spacing-xs);
+            border: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .day-number {
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-align: right;
+        }
+        
+        .day-cell.today {
+            border: 2px solid var(--color-primary);
+        }
+
+        .workout-event {
+            padding: 4px 8px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.75rem;
+            color: var(--color-white);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .workout-event.strength { background-color: #3B82F6; } /* Azul */
+        .workout-event.cardio { background-color: #10B981; }   /* Verde */
+        .workout-event.hiit { background-color: #F59E0B; }     /* Naranja */
+        .workout-event.flexibility { background-color: #A855F7; } /* Morado */
+
+        /* --- Próximos Entrenamientos --- */
+        .upcoming-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .upcoming-workout-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md);
+            background-color: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-light);
+        }
+
+        .workout-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .workout-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: var(--color-white);
+        }
+
+        .workout-info h4 {
+            font-weight: 600;
+        }
+
+        .workout-info p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        .upcoming-actions {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .btn-reschedule {
+            padding: 8px 15px;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .schedule-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .month-selector {
+                margin-top: var(--spacing-md);
+                justify-content: center;
+            }
+            .calendar-grid {
+                font-size: 0.75rem;
+            }
+            .day-cell {
+                min-height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-dumbbell logo-icon"></i>
+            <span>FitTracker</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="workouts.html">Workouts</a></li>
+                <li class="active"><a href="schedule.html">Schedule</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile">
+            <i class="fa-regular fa-bell" style="color: var(--color-text-secondary);"></i>
+            <div class="user-avatar">JD</div>
+        </div>
+    </header>
+
+    <main class="main-content app-container">
+        <header class="schedule-header">
+            <div>
+                <h1>Workout Schedule</h1>
+                <p>Plan and manage your training sessions</p>
+            </div>
+            <button class="btn btn-primary">
+                <i class="fa-solid fa-plus icon"></i> Schedule Workout
+            </button>
+        </header>
+
+        <section class="calendar-container">
+            <div class="calendar-controls">
+                <div class="view-toggles">
+                    <button class="toggle-btn active">Month View</button>
+                    <button class="toggle-btn">Week View</button>
+                    <button class="toggle-btn">Day View</button>
+                </div>
+                <div class="month-selector">
+                    <button><i class="fa-solid fa-chevron-left"></i></button>
+                    <span>January 2024</span>
+                    <button><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div class="calendar-grid">
+                <div class="day-header">Sun</div>
+                <div class="day-header">Mon</div>
+                <div class="day-header">Tue</div>
+                <div class="day-header">Wed</div>
+                <div class="day-header">Thu</div>
+                <div class="day-header">Fri</div>
+                <div class="day-header">Sat</div>
+
+                <div class="day-cell"><span class="day-number">31</span></div>
+                <div class="day-cell">
+                    <span class="day-number">1</span>
+                    <div class="workout-event strength">Upper Body</div>
+                </div>
+                <div class="day-cell">
+                    <span class="day-number">2</span>
+                </div>
+                <div class="day-cell">
+                    <span class="day-number">3</span>
+                    <div class="workout-event cardio">Cardio</div>
+                </div>
+                <div class="day-cell">
+                    <span class="day-number">4</span>
+                </div>
+                <div class="day-cell">
+                    <span class="day-number">5</span>
+                    <div class="workout-event flexibility">Leg Day</div>
+                </div>
+                <div class="day-cell"><span class="day-number">6</span></div>
+                <div class="day-cell"><span class="day-number">7</span></div>
+                <div class="day-cell">
+                    <span class="day-number">8</span>
+                    <div class="workout-event strength">Upper Body</div>
+                </div>
+                <div class="day-cell"><span class="day-number">9</span></div>
+                <div class="day-cell">
+                    <span class="day-number">10</span>
+                    <div class="workout-event hiit">HIIT</div>
+                </div>
+                <div class="day-cell"><span class="day-number">11</span></div>
+                <div class="day-cell">
+                    <span class="day-number">12</span>
+                    <div class="workout-event flexibility">Leg Day</div>
+                </div>
+                <div class="day-cell"><span class="day-number">13</span></div>
+                <div class="day-cell"><span class="day-number">14</span></div>
+                <div class="day-cell">
+                    <span class="day-number">15</span>
+                    <div class="workout-event strength">Upper Body</div>
+                </div>
+                <div class="day-cell"><span class="day-number">16</span></div>
+                <div class="day-cell today">
+                    <span class="day-number">17</span>
+                    <div class="workout-event strength">Upper Body</div>
+                    <span style="font-size: 0.6rem; color: #6B7280; text-align: right;">6:00 PM</span>
+                </div>
+                <div class="day-cell"><span class="day-number">18</span></div>
+                <div class="day-cell">
+                    <span class="day-number">19</span>
+                    <div class="workout-event flexibility">Leg Day</div>
+                </div>
+                <div class="day-cell"><span class="day-number">20</span></div>
+                <div class="day-cell"><span class="day-number">21</span></div>
+                <div class="day-cell"><span class="day-number">22</span></div>
+                <div class="day-cell"><span class="day-number">23</span></div>
+                <div class="day-cell"><span class="day-number">24</span></div>
+                <div class="day-cell"><span class="day-number">25</span></div>
+                <div class="day-cell"><span class="day-number">26</span></div>
+                <div class="day-cell"><span class="day-number">27</span></div>
+                <div class="day-cell"><span class="day-number">28</span></div>
+                <div class="day-cell"><span class="day-number">29</span></div>
+                <div class="day-cell"><span class="day-number">30</span></div>
+                <div class="day-cell"><span class="day-number">31</span></div>
+                <div class="day-cell"><span class="day-number" style="color: var(--color-text-secondary);">1</span></div>
+                <div class="day-cell"><span class="day-number" style="color: var(--color-text-secondary);">2</span></div>
+                <div class="day-cell"><span class="day-number" style="color: var(--color-text-secondary);">3</span></div>
+            </div>
+        </section>
+
+        <section>
+            <h2 style="font-size: 1.5rem; margin-bottom: var(--spacing-md);">Upcoming Workouts</h2>
+            <div class="upcoming-list">
+                <article class="upcoming-workout-item">
+                    <div class="workout-info">
+                        <div class="workout-icon" style="background-color: #3B82F6;">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        <div>
+                            <h4>Upper Body Strength</h4>
+                            <p>Today, 6:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="upcoming-actions">
+                        <button class="btn btn-primary btn-reschedule">Start Now</button>
+                        <button class="btn btn-secondary" style="width: 30px;"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                </article>
+                
+                <article class="upcoming-workout-item">
+                    <div class="workout-info">
+                        <div class="workout-icon" style="background-color: #10B981;">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <div>
+                            <h4>Cardio Session</h4>
+                            <p>Tomorrow, 7:00 AM</p>
+                        </div>
+                    </div>
+                    <div class="upcoming-actions">
+                        <button class="btn btn-secondary btn-reschedule">Reschedule</button>
+                        <button class="btn btn-secondary" style="width: 30px;"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                </article>
+
+                <article class="upcoming-workout-item">
+                    <div class="workout-info">
+                        <div class="workout-icon" style="background-color: #A855F7;">
+                            <i class="fa-solid fa-shoe-prints"></i>
+                        </div>
+                        <div>
+                            <h4>Leg Day Power</h4>
+                            <p>Friday, 5:30 PM</p>
+                        </div>
+                    </div>
+                    <div class="upcoming-actions">
+                        <button class="btn btn-secondary btn-reschedule">Reschedule</button>
+                        <button class="btn btn-secondary" style="width: 30px;"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Workouts | FitTracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles/_reset.css">
+    <link rel="stylesheet" href="styles/_variables.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    
+    <style>
+        /* Estilos específicos para la vista Workouts */
+        
+        .workouts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .workouts-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .workouts-header p {
+            color: var(--color-text-secondary);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .search-container {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .search-container input {
+            padding-left: 40px; /* Espacio para el icono */
+        }
+
+        .search-container .icon-search {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: var(--color-text-secondary);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0; /* Para que los botones de filtro estén juntos */
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: var(--color-white);
+            color: var(--color-text-dark);
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background-color: var(--color-background);
+        }
+
+        .filter-btn.active {
+            background-color: var(--color-background);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .workouts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        /* Estilo de Tarjeta de Entrenamiento */
+        .workout-card {
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .workout-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .workout-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .workout-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .workout-details ul {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md) var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 0.875rem;
+            color: var(--color-text-dark);
+        }
+
+        .detail-item i {
+            color: var(--color-primary);
+        }
+
+        .workout-card-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .btn-calendar {
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            color: var(--color-primary);
+            width: 50px;
+            justify-content: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filter-bar {
+                flex-direction: column;
+            }
+            .filter-buttons {
+                width: 100%;
+                justify-content: stretch;
+            }
+            .filter-btn {
+                flex-grow: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-dumbbell logo-icon"></i>
+            <span>FitTracker</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li class="active"><a href="workouts.html">Workouts</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile">
+            <i class="fa-regular fa-bell" style="color: var(--color-text-secondary);"></i>
+            <div class="user-avatar">JD</div>
+        </div>
+    </header>
+
+    <main class="main-content app-container">
+        <header class="workouts-header">
+            <div>
+                <h1>My Workouts</h1>
+                <p>Manage and track your workout plans</p>
+            </div>
+            <a href="create-workout.html" class="btn btn-primary">
+                <i class="fa-solid fa-plus icon"></i> Create Workout
+            </a>
+        </header>
+
+        <section class="filter-bar">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass icon-search"></i>
+                <input type="text" placeholder="Search workouts..." class="input-field">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active">All Types</button>
+                <button class="filter-btn">Most Recent</button>
+            </div>
+        </section>
+
+        <section class="workouts-grid">
+            
+            <article class="card workout-card">
+                <header class="workout-card-header">
+                    <div>
+                        <h3>Upper Body Strength</h3>
+                        <p>Strength Training</p>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical" style="color: var(--color-text-secondary);"></i>
+                </header>
+
+                <div class="workout-details">
+                    <ul>
+                        <li class="detail-item"><i class="fa-regular fa-clock"></i> 45-60 minutes</li>
+                        <li class="detail-item"><i class="fa-solid fa-bolt"></i> 6 exercises</li>
+                        <li class="detail-item"><i class="fa-regular fa-calendar"></i> Last performed: Today</li>
+                    </ul>
+                </div>
+                
+                <footer class="workout-card-actions">
+                    <button class="btn btn-primary" style="flex-grow: 1;">Start Workout</button>
+                    <button class="btn btn-calendar"><i class="fa-regular fa-calendar-plus"></i></button>
+                </footer>
+            </article>
+
+            <article class="card workout-card">
+                <header class="workout-card-header">
+                    <div>
+                        <h3>Leg Day Power</h3>
+                        <p>Strength Training</p>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical" style="color: var(--color-text-secondary);"></i>
+                </header>
+
+                <div class="workout-details">
+                    <ul>
+                        <li class="detail-item"><i class="fa-regular fa-clock"></i> 50-70 minutes</li>
+                        <li class="detail-item"><i class="fa-solid fa-bolt"></i> 8 exercises</li>
+                        <li class="detail-item"><i class="fa-regular fa-calendar"></i> Last performed: 2 days ago</li>
+                    </ul>
+                </div>
+                
+                <footer class="workout-card-actions">
+                    <button class="btn btn-primary" style="flex-grow: 1;">Start Workout</button>
+                    <button class="btn btn-calendar"><i class="fa-regular fa-calendar-plus"></i></button>
+                </footer>
+            </article>
+
+            <article class="card workout-card">
+                <header class="workout-card-header">
+                    <div>
+                        <h3>HIIT Cardio Blast</h3>
+                        <p>HIIT</p>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical" style="color: var(--color-text-secondary);"></i>
+                </header>
+
+                <div class="workout-details">
+                    <ul>
+                        <li class="detail-item"><i class="fa-regular fa-clock"></i> 25-30 minutes</li>
+                        <li class="detail-item"><i class="fa-solid fa-bolt"></i> 5 exercises</li>
+                        <li class="detail-item"><i class="fa-regular fa-calendar"></i> Last performed: 1 week ago</li>
+                    </ul>
+                </div>
+                
+                <footer class="workout-card-actions">
+                    <button class="btn btn-primary" style="flex-grow: 1;">Start Workout</button>
+                    <button class="btn btn-calendar"><i class="fa-regular fa-calendar-plus"></i></button>
+                </footer>
+            </article>
+
+            </section>
+    </main>
+</body>
+</html>
