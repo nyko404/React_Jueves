@@ -1,16 +1,28 @@
-# React + Vite
+# Mi App React - CV Dinámico
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación de CV interactivo construida con React y Vite.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Visualización de CV**: Muestra información personal, perfil, experiencia y educación.
+- **Stack de Tecnologías Dinámico**: Lista de tecnologías con renderizado condicional de colores según el tipo.
+- **Gestión de Estado**: Uso de `useState` para manejar la lista de tecnologías y la visibilidad de secciones.
 
-## React Compiler
+## Eventos y Estados
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Estados Principales (`App.jsx`)
+- `tecnologias`: Array de objetos que almacena las tecnologías mostradas.
+- `mostrarHabilidades`: Booleano que controla la visibilidad de la sección de habilidades blandas.
 
-## Expanding the ESLint configuration
+### Eventos
+- **Toggle Habilidades**: Botón que alterna el estado `mostrarHabilidades` para mostrar u ocultar la lista de habilidades.
+- **Agregar Tecnología**: Formulario que captura el nombre y tipo de tecnología, y actualiza el estado `tecnologias` mediante la función `agregarTecnologia`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Ejecución
+
+Para correr el proyecto localmente:
+
+```bash
+npm install
+npm run dev
+```
