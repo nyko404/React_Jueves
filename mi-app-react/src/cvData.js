@@ -46,3 +46,20 @@ export const educacion = [
         periodo: "2023"
     }
 ];
+
+
+// REQUISITO 4: Actualizar el archivo cvData.js para separar los datos iniciales del estado dinámico
+export const listaTecnologias = [
+    { id: 1, nombre: "React", tipo: "frontend" },
+    { id: 2, nombre: "Node.js", tipo: "backend" },
+    { id: 3, nombre: "JavaScript", tipo: "frontend" },
+    { id: 4, nombre: "PostgreSQL", tipo: "base de datos" }
+];
+
+// Lista de habilidades
+export const listaHabilidades = [
+    { id: 1, nombre: "Trabajo en equipo", nivel: "Avanzado" },
+    { id: 2, nombre: "Comunicación asertiva", nivel: "Intermedio" },
+    { id: 3, nombre: "Gestión del tiempo", nivel: "Avanzado" },
+    { id: 4, nombre: "Resolución de problemas", nivel: "Avanzado" }
+];
