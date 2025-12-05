@@ -1,13 +1,4 @@
-export default function Educacion() {
-  const educacion = [
-    {
-      id: 1,
-      titulo: "Ingeniería en Sistemas",
-      universidad: "Universidad Nacional",
-      periodo: "2018-2022",
-    },
-  ];
-
+export default function Educacion({ educacion }) {
   return (
     <section>
       <h3>Educación</h3>

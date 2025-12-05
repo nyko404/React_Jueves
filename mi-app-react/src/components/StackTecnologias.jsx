@@ -3,7 +3,7 @@ export default function StackTecnologias() {
     { id: 1, nombre: "React", tipo: "frontend" },
     { id: 2, nombre: "Node.js", tipo: "backend" },
     { id: 3, nombre: "JavaScript", tipo: "frontend" },
-    { id: 4, nombre: "PostgreSQL", tipo: "base de datos" },
+    { id: 4, nombre: "PostgreSQL", tipo: "base de datos" }
   ];
 
   // Función para asignar colores según el tipo de tecnología
