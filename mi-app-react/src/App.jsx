@@ -44,7 +44,8 @@ export default function App() {
       <Experiencia experiencias={experiencias} />
       <Educacion educacion={educacion} />
 
-      <StackTecnologias />
+      {/* REQUISITO 1: StackTecnologias (ahora dinámico) */}
+      <StackTecnologias tecnologias={tecnologias} />
 
       {/* REQUISITO 2: Componente FormularioTecnologia */}
       <FormularioTecnologia agregarTecnologia={agregarTecnologia} />
